@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block  title%}
+  Luna
+{% endblock  %}
+{% block style %}
+.tagg{
+    padding-top:130px;
+    padding-bottom: 60px;
+    width:65%;
+    margin:auto;
+    
+}
+
+{% endblock  %}
+{% block content %}
+<div  class = "tagg" >
+    <div class="card aside-card">
+        <h3 class="headline headline-2 aside-title" style="margin-bottom: 18px;font-size: 2.8rem; width:30%;">
+          <span class="span" style="margin:auto">User Profile</span>
+        </h3>
+    <div class="hero" id="home" aria-label="home" style="padding-top:15px;">
+    <form action="" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        
+    <div style="padding-bottom:35px">
+        <div class='slider-title'>
+        {{profile_form.email.label_tag}}
+        </div>
+        {{profile_form.email}}
+        <div style="padding-bottom:27px; padding-top:30px;">
+            <div class='slider-title'>
+            {{profile_form.photo.label_tag}}
+            </div>
+            {{profile_form.photo}}
+        </div>
+    </div>
+</div>
+    
+    <button class="btn btn-primary" type= 'submit'>
+            <span class="span">Update</span>
+      
+            <ion-icon name="arrow-forward-outline" aria-hidden="true"></ion-icon>
+          </button>
+          
+    </form>
+    
+</div>
+
+</div>
+{% endblock content %}
+{% block footer %}
+{% endblock %}
