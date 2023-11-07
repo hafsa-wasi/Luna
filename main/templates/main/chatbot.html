@@ -1,0 +1,65 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- 
+    - primary meta tags
+  -->
+  <title>Luna</title>
+  <meta name="title" content="Luna">
+  <meta name="description" content="This is a blog html">
+
+  <!-- 
+    - favicon
+  -->
+  <link rel="shortcut icon" href="./favicon.svg" type="image/svg+xml">
+
+  <!-- 
+    - google font link
+  -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@300;400;500;600;700;800&display=swap"
+    rel="stylesheet">
+
+  <!-- 
+    - custom css link
+  -->
+  
+  <link rel="stylesheet" href="{% static 'main/stylesheet/style.css' %}">
+
+</head>
+<body >
+        
+            {% comment %} <h3 class="headline headline-3" style="font-size:31px ;padding:30px; margin-left:20px; padding-left:0px;margin-left:0px";>
+              Summary  
+            </h3>
+        
+    {% if response %}
+    {{response|safe}}
+    {% endif %} {% endcomment %}
+    
+    <div style="padding-top:60px;">
+      <h3 class="headline headline-3" style="font-size:31px ;padding:30px; margin-left:20px; padding-left:0px;margin-left:0px; color:dark blue;">
+        Summary  
+      </h3>
+      <div style="font-size:15px;">
+      <ul style="list-style-type: disc;">
+      {% if response %}
+      {{response|linebreaks}}
+      {% endif %}
+      </ul>
+      </div>
+      <div style="padding-top:25px;">
+      <a href="#close" rel="modal:close" class="btn btn-primary">Close window</a>
+    </div>
+  </div>
+</body>
+</html>
+
+
