@@ -1,5 +1,6 @@
 # Luna
 This is a third party blogging webapplication with multiple webpages and features.
+![Home](https://github.com/hafsa-wasi/Luna/assets/118012663/1c9f3826-a77e-4c97-8649-91c8a7dcb8d2)
 ## Its main features are:
 1. Authentication (Signin/Signup/Signout)
 2. Posting article
@@ -8,8 +9,21 @@ This is a third party blogging webapplication with multiple webpages and feature
 5. Favorites (liking someone article)
 6. Comment Section
 7. User Profile (that have user information, their posts and their liked posts)
-8. ___Summarize (summarizes the current article in bulletins)___
+8. ___Summarize (summarizes the current article in bulletins using AI)___
 9. Above all fully dynamic editors picked , popular post, recents and last comment section
 
 ## Its consisting wepages are:
-<img width="100" height="100" src="https://github.com/hafsa-wasi/Luna/assets/118012663/bcc50585-dc2e-4a19-a535-a29e6bfcb446">
+1. Home(when no user is signin ...if you accesss any page that requires authentication the user will be redirected to signin page)
+2. User_home(when user is signin)
+3. Read_Article (this also have comment section, liking and summarizing options and edit article if its wrtten by the user)
+4. Write_Article
+5. Edit_Article
+6. Signin
+7. Signup
+8. Search (this shows search query results)
+9. User profile
+10. Summmary (It's a jquery modal that is shown above Read_Article)
+
+
+
+
