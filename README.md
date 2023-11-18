@@ -12,3 +12,5 @@ This is a third party blogging webapplication with multiple webpages and feature
 9. Above all fully dynamic editors picked , popular post, recents and last comment section
 
 ## Its consisting wepages are:
+https://github.com/hafsa-wasi/Luna/blob/main/luna_ss/Home.png
+https://github.com/hafsa-wasi/Luna/blob/main/luna_ss/article.png
