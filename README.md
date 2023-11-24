@@ -2,7 +2,9 @@
 This is a third party Full stack blogging webapplication with multiple webpages and features.
 
 
-![Home](https://github.com/hafsa-wasi/Luna/assets/118012663/1c9f3826-a77e-4c97-8649-91c8a7dcb8d2)
+
+https://github.com/hafsa-wasi/Luna/assets/118012663/c6b70355-c486-42b4-a870-e8ecc9cf7c67
+
 ## Its main features are:
 1. Authentication (Signin/Signup/Signout)
 2. Posting article
