@@ -1,0 +1,84 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block  title%}
+  Luna
+{% endblock  %}
+{% block style %}
+.tagg{
+    padding-top: 100px;
+  }
+#photo{
+     width:446px;
+     height:251px;
+}
+.adjust{
+  margin-bottom:50px;
+}
+{% comment %} img {
+  object-fit: fill;
+} {% endcomment %}
+
+{% endblock  %}
+{% block content %}
+<div class = tagg >
+          <section  id="recent" aria-labelledby="recent-label">
+            <div class="container">
+    
+              <div class="post-main">
+    
+                <h2 class="headline headline-2 section-title">
+                  <span class="span">Recent posts</span>
+                </h2>
+    
+                <p class="section-text">
+                  Don't miss the latest trends
+                </p>
+    
+                <ul "grid-list">
+                {% for block in more %}
+                  <li class="adjust">
+                    <div class="recent-post-card">
+                      
+                      <figure class="card-banner img-holder" style="--width: 1602; --height: 903;">
+                        <img src={{block.image.url}}  loading="lazy"
+                          alt="Helpful Tips for Working from Home as a Freelancer" class="img-cover" >
+                      </figure>
+                      
+    
+                      <div class="card-content">
+    
+                        <p class="card-badge">{{block.updated_at|date:"F j, Y" }}</p>
+    
+                        <h3 class="headline headline-3 card-title">
+                          <a href="{% url 'get' sign=sign id=block.id %}" class="link hover-2">{{block.heading}}</a>
+                        </h3>
+    
+                        <p class="card-text">
+                          {{block.description}}
+                        </p>
+    
+                        <div class="card-wrapper">
+                          <div class="card-tag">
+                            <a href="#" class="span hover-2"># {{block.category}}</a>
+    
+                            <a href="#" class="span hover-2"># {{block.tag}}</a>
+                          </div>
+    
+                          <div class="wrapper">
+                            <ion-icon name="time-outline" aria-hidden="true"></ion-icon>
+    
+                            <span class="span">3 mins read</span>
+                          </div>
+                        </div>
+    
+                      </div>
+    
+                    </div>
+                  </li>
+                {% endfor %}
+                </ul>
+              </div>      
+</div>
+{% endblock content %}
+
+       

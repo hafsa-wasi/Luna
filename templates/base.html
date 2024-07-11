@@ -1,0 +1,303 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- 
+    - primary meta tags
+  -->
+  <title>{% block title %}{% endblock  %}</title>
+  <meta name="title" content="Luna">
+  <meta name="description" content="This is a blog html">
+
+  <!-- 
+    - favicon
+  -->
+  <link rel="shortcut icon" href="{% static 'main/images/favicon.svg' %}" type="image/svg+xml">
+
+  <!-- 
+    - google font link
+  -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@300;400;500;600;700;800&display=swap"
+    rel="stylesheet">
+
+  <!-- 
+    - custom css link
+  -->
+  <style>
+    @media (min-width: 1000px) {
+      .signin-nav {display:none}
+    }
+    {% block style %}{% endblock  %}</style>
+  <link rel="stylesheet" href="{% static 'main/stylesheet/style.css' %}">
+
+   <!--JQUERY CDN-->
+   <script src="https://code.jquery.com/jquery-3.7.1.min.js" 
+   integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" 
+   crossorigin="anonymous"></script>
+   {% block head %}{% endblock %}
+ 
+</head>
+<body id="top">
+    <header  class="header" data-header>
+        <div class="container">
+            {% if sign == '1' %}
+                <a href="{% url 'user_home' %}" class="logo">
+                  <img src="{% static 'main/images/logo5.png' %}" width="119" height="37" alt="Luna logo">
+                </a>
+            {% else %}
+                <a href="{% url 'index' %}" class="logo">
+                  <img src="{% static 'main/images/logo5.png' %}" width="119" height="37" alt="Luna logo">
+                </a>
+            {% endif %}
+            <nav class="navbar" data-navbar>
+            <div class="navbar-top">
+              {% if sign == '1' %}
+                <a href="{% url 'user_home' %}" class="logo">
+                  <img src="{% static 'main/images/logo5.png' %}" width="119" height="37" alt="Luna logo">
+                </a>
+              {% else %}
+                <a href="{% url 'index' %}" class="logo">
+                  <img src="{% static 'main/images/logo5.png' %}" width="119" height="37" alt="Luna logo">
+                </a>
+              {% endif %}
+              <button class="nav-close-btn" aria-label="close menu" data-nav-toggler>
+                <ion-icon name="close-outline" aria-hidden="true"></ion-icon>
+              </button>
+            </div>
+            <ul class="navbar-list">
+              <li>
+                {% if sign == '1' %}
+                <a href="{% url 'user_home' %}" class="navbar-link hover-1" data-nav-toggler>Home</a>
+                {% else %}
+                <a href="{% url 'index' %}" class="navbar-link hover-1" data-nav-toggler>Home</a>
+                {% endif %}
+              </li>
+              <li>
+                <a href="{% url 'recent' sign=sign %}" class="navbar-link hover-1" data-nav-toggler>Recent Post</a>
+              </li>
+              <li>
+                {% if sign == '1' %}
+                <a href="{% url 'user_home' %}#head" class="navbar-link hover-1" data-nav-toggler>Popular Topics</a>
+                {% else %}
+                <a href="{% url 'index' %}#head" class="navbar-link hover-1" data-nav-toggler>Popular Topics</a>
+                {% endif %}
+              </li>
+              <li>
+                <a href="{% url 'post' sign=sign%}" class="navbar-link hover-1" data-nav-toggler>Compose</a>
+              </li>
+              <li>
+                <a href="{% url 'profile'%}" class="navbar-link hover-1" data-nav-toggler>Profile</a>
+              </li>
+              <li class="signin-nav">
+                {% if sign == '0' %}
+                <a href="{% url 'signin'%}" class="navbar-link hover-1" style="color:#2fa2c2" data-nav-toggler>Signin</a>
+                {% else %}
+                <a href="{% url 'signout' %}" class="navbar-link hover-1" style="color:#872414gi" data-nav-toggler>Signout</a>
+                {% endif %}
+              </li>
+            </ul>
+    
+            <div class="navbar-bottom">
+            <p class="copyright-text">
+              Copyright © Luna 
+              Developed by Hafsa Wasi
+            </p>
+            </div>
+            </nav>
+    
+          {% if sign == '0' %}
+            <a href="{% url 'signin' %}" class="btn btn-primary">Signin</a>
+          {% else %}
+            <a href="{% url 'signout' %}" class="btn btn-primary">Signout</a>
+          {% endif %}
+          <button class="nav-open-btn" aria-label="open menu" data-nav-toggler>
+            <ion-icon name="menu-outline" aria-hidden="true"></ion-icon>
+          </button>
+    
+        </div>
+    </header>
+    
+    
+{% block content %}{% endblock  %}
+{% block footer %}  
+ <footer id="email" >
+        <div class="container">
+    
+          <div class="card footer">
+    
+            <div class="section footer-top">
+    
+              <div class="footer-brand">
+    
+                <a href="#" class="logo">
+                  <img src="{% static 'main/images/logo5.png' %}" width="119" height="37" loading="lazy" alt="Wren logo">
+                </a>
+    
+                <p class="footer-text">
+                    Are you ready to explore, learn, and grow with us? 
+                    Let's begin this enlightening adventure together. 
+                    Remember, the journey of a thousand miles
+                    begins with a single click
+                </p>
+    
+                <p class="footer-list-title">Address</p>
+    
+                <address class="footer-text address">
+                  Najafgarh road, <br>
+                  New Delhi, 1100xx
+                </address>
+    
+              </div>
+    
+              <div class="footer-list">
+
+                <p class="footer-list-title">Categories</p>
+    
+                <ul>
+    
+                  <li>
+                    <a href="{% url 'tags' sign=sign tag="animal" %}" class="footer-link hover-2">Animal</a>
+                  </li>
+    
+                  <li>
+                    <a href="{% url 'tags' sign=sign tag="business" %}" class="footer-link hover-2">Business</a>
+                  </li>
+    
+                  <li>
+                    <a href="{% url 'tags' sign=sign tag="culture" %}" class="footer-link hover-2">Culture</a>
+                  </li>
+    
+                  <li>
+                    <a href="{% url 'tags' sign=sign tag="fashion" %}" class="footer-link hover-2">Fashion</a>
+                  </li>
+    
+                  <li>
+                    <a href="{% url 'tags' sign=sign tag="food" %}" class="footer-link hover-2">Food</a>
+                  </li>
+    
+                  <li>
+                    <a href="{% url 'tags' sign=sign tag="interior" %}" class="footer-link hover-2">Interior</a>
+                  </li>
+    
+                  <li>
+                    <a href="{% url 'tags' sign=sign tag="lifestyle" %}" class="footer-link hover-2">Lifestyle</a>
+                  </li>
+    
+                  <li>
+                    <a href="{% url 'tags' sign=sign tag="minimal" %}" class="footer-link hover-2">Minimal</a>
+                  </li>
+    
+                  <li>
+                    <a href="{% url 'tags' sign=sign tag="nature" %}" class="footer-link hover-2">Nature</a>
+                  </li>
+    
+                  <li>
+                    <a href="{% url 'tags' sign=sign tag="plant" %}" class="footer-link hover-2">Plant</a>
+                  </li>
+    
+                  <li>
+                    <a href="{% url 'tags' sign=sign tag="space" %}" class="footer-link hover-2">Space</a>
+                  </li>
+    
+                  <li>
+                    <a href="{% url 'tags' sign=sign tag="travel" %}" class="footer-link hover-2">Travel</a>
+                  </li>
+    
+                </ul>
+    
+              </div>
+     <div class="footer-list">
+
+      <p class="footer-list-title">About Developer</p>
+
+      <p class="footer-text">
+        Hey, it's Hafsa Wasi, I am in second year of Bachelor's in Technology.  
+      </p>
+      <p class="footer-text">
+        This is my first project, hope you have good experience. If you encounter any bug or bad UI you can email me on my email address below  
+      </p>
+      <div class="input-wrapper">
+        <a href="https://mail.google.com/mail/u/0/#inbox?compose=CllgCJNrdNmSsqtwFJBGFxwFtktFvdRDBdVqNZPKCKKxZNKgZddGBTVHfgqlrZjMLkfjvbZklzL" 
+        style="padding-left:28px;" class="footer-link hover-2">hafsawasi20@gmail.com
+
+        <ion-icon name="mail-outline" aria-hidden="true"></ion-icon></a>
+      </div>
+
+    </div>
+
+  </div>
+            <div class="footer-bottom">
+    
+              <p class="copyright">
+                &copy; Developed by <a href="#" class="copyright-link">Hafsa Wasi</a>
+              </p>
+    
+              <ul class="social-list">
+    
+                <li>
+                  <a href="https://twitter.com/HafsaWasi74416" class="social-link">
+                    <ion-icon name="logo-twitter"></ion-icon>
+    
+                    <span class="span">Twitter</span>
+                  </a>
+                </li>
+    
+                <li>
+                  <a href="https://www.linkedin.com/in/hafsa-wasi-a3654228b?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" class="social-link">
+                    <ion-icon name="logo-linkedin"></ion-icon>
+    
+                    <span class="span">LinkedIn</span>
+                  </a>
+                </li>
+    
+                <li>
+                  <a href="https://instagram.com/hafsawasi20?igshid=MzMyNGUyNmU2YQ==" class="social-link">
+                    <ion-icon name="logo-instagram"></ion-icon>
+    
+                    <span class="span">Instagram</span>
+                  </a>
+                </li>
+    
+              </ul>
+    
+            </div>
+    
+          </div>
+    
+        </div>
+      </footer>
+      {% endblock %}
+    
+    
+    
+    
+      <!-- 
+        - #BACK TO TOP
+      -->
+    
+      <a href="#top" class="back-top-btn" aria-label="back to top" data-back-top-btn>
+        <ion-icon name="arrow-up-outline" aria-hidden="true"></ion-icon>
+      </a>
+    
+    
+    
+    
+    
+      <!-- 
+        - custom js link
+      -->
+      <script src="{% static 'main/home.js' %}"></script>
+    
+      <!-- 
+        - ionicon link
+      -->
+      <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+      <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+</body> 

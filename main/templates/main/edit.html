@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block  title%}
+  Luna
+{% endblock  %}
+{% block style %}
+.tagg{
+    padding-top:130px;
+}
+
+{% endblock  %}
+{% block content %}
+{% comment %} <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Page Title</title>
+    <!-- Add any additional meta tags, links, or stylesheets here -->
+</head>
+<body>
+    <!-- Your content goes here -->
+    <header>
+        <h1>Welcome to EDIT</h1>
+    </header>
+    
+    <main>
+        <section>
+            <form  action="" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{post_form}}
+                <button type= 'submit'>Save</button>
+            </form>
+        </section>
+    </main>
+</body>
+</html> {% endcomment %}
+<div  class = "tagg" >
+    
+    <div class="card aside-card">
+        <h3 class="headline headline-2 aside-title" style="margin-bottom: 18px;">
+          <span class="span">Edit Your Post</span>
+        </h3>
+    <div class="hero" id="home" aria-label="home" style="padding-bottom: 20px; padding-top:5px;">
+    <form action="" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+    <div style="padding-bottom:27px">
+        {{post_form.heading.label_tag}}
+        {{post_form.heading}}
+    </div>
+    <div style="padding-bottom:27px">
+        {{post_form.description.label_tag}}
+        {{post_form.description}}
+    </div>
+    <div style="padding-bottom:27px">
+        {{post_form.article.label_tag}}
+        {{post_form.article}}
+    </div>
+    <div style="padding-bottom:27px">
+        {{post_form.image.label_tag}}
+        {{post_form.image}}
+    </div>
+    <div style="padding-bottom:27px">
+        {{post_form.category.label_tag}}
+        {{post_form.category}}
+    </div>
+    <div style="padding-bottom:27px">
+        {{post_form.tag.label_tag}}
+        {{post_form.tag}}
+    </div>   
+        <button class="btn btn-primary" type= 'submit'>
+            <span class="span">Edit</span>
+      
+            <ion-icon name="arrow-forward-outline" aria-hidden="true"></ion-icon>
+          </button>
+    </form>
+</div>
+
+</div>
+{% endblock content %}
+{% block footer %}
+{% endblock %}

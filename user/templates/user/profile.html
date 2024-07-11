@@ -1,0 +1,169 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block  title%}
+  Luna
+{% endblock  %}
+{% block style %}
+.tagg{
+    padding-top: 135px;
+    padding-bottom: 60px;
+    width:95%;
+    margin:auto;
+}
+.adjust{
+     margin-bottom:50px;
+}
+.flex-container {
+  display: flex;
+  flex-direction: row;
+}
+@media (max-width: 800px) {
+  .flex-container {
+    flex-direction: column;
+  }
+}
+
+
+{% endblock  %}
+{% block content %}
+    <div  class = "tagg" >
+    
+        <div class="card aside-card">
+            <h2 class="headline headline-2 section-title" style="margin-bottom: 18px;">
+              <span class="span">Your Profile</span>
+            </h2>
+        <div class="hero" id="home" aria-label="home" style="padding-bottom: 20px; padding-top:5px;">
+            <div>
+              
+                <div class="profile-card">
+                  <div class="flex-container">
+                    {% if sub.photo %}
+                    <img src={{sub.photo.url}} loading="lazy" alt="Joseph"
+                      class="profile-banner" style="width:150px; height:150px"> 
+                    {% else %}
+                    <img src="{% static 'main/images/wuthering.jpg' %}" width="150" height="140" loading="lazy" alt="Joseph" class="profile-banner">
+                    {% endif %}
+
+                    <div style="width:80%; margin:auto">
+                        <h3 class="headline headline-2 aside-title" style="margin-bottom: 18px;font-size: 2.8rem;">
+                            <span class="span">{{sub.user}}</span>
+                          </h3>
+                    {% if sub.email %}
+                      <p class="card-subtitle" style="font-size: 2.0rem;">{{sub.email}}</p>
+                    {% else %}
+                      <p class="card-subtitle" style="font-size: 2.0rem;">-----</p>
+                    {% endif %}
+                    <div  class="profile-card" style="padding-top:20px; ">
+                    <a href="{% url 'update'  %}" class="btn btn-primary" style="margin-left:auto">Update Profile</a>
+                    <a href="{% url 'delete'  %}" class="btn btn-primary" style="color:#4f0808; ">Delete</a>
+                    </div>
+                  </div>
+                  </div>
+                </div>
+                <h2 class="headline headline-2 section-title" style="margin-bottom: 18px;margin-top:50px;">
+                    <span class="span">Favourites</span>
+                  </h2>
+                {% comment %} {% for block in liked_post %}
+                    <h5>{{block.post.heading}}</h5>
+                    <img src={{block.post.image.url}} width="50" height="50" loading="lazy" alt="Joseph"
+                              class="profile-banner">
+                    <h5>{{block.post.author.user}}</h5>
+                {% endfor %} {% endcomment %}
+                {% if liked_post|length == 0 %}
+                <h3 class="headline headline-2 aside-title">No Favourites yet.</h3>
+                {% else %}
+                <ul "grid-list">
+                    {% for block in liked_post%}
+                      <li class="adjust">
+                        <div class="recent-post-card">
+                          
+                          <figure class="card-banner img-holder" style="--width: 1602; --height: 903;">
+                            <img src={{block.post.image.url}}  loading="lazy"
+                              alt="Helpful Tips for Working from Home as a Freelancer" class="img-cover" id="photo">
+                          </figure>
+                          
+        
+                          <div class="card-content">
+        
+                            <p class="card-badge">{{block.post.updated_at|date:"F j, Y" }}</p>
+        
+                            <h3 class="headline headline-3 card-title">
+                              <a href="{% url 'get' sign=sign id=block.post.id %}" class="link hover-2">{{block.post.heading}}</a>
+                            </h3>
+        
+                            <p class="card-text">
+                              {{block.post.description}}
+                            </p>
+        
+                            <div class="card-wrapper">
+                              <div class="card-tag">
+                                <a href="#" class="span hover-2"># {{block.post.category}}</a>
+        
+                                <a href="#" class="span hover-2"># {{block.post.tag}}</a>
+                              </div>
+                            </div>
+        
+                          </div>
+        
+                        </div>
+                      </li>
+                    {% endfor %}
+                    </ul>
+                {%endif%}
+                <h2 class="headline headline-2 section-title" style="margin-bottom: 18px;">
+                    <span class="span">Your Posts</span>
+                  </h2>
+                {% comment %} {% for block in my_post %}
+                <h5>{{block.heading}}</h5>
+                    <img src={{block.image.url}} width="50" height="50" loading="lazy" alt="Joseph"
+                              class="profile-banner">
+                    
+                {% endfor %} {% endcomment %}
+                {% if my_post|length == 0 %}
+                <h3 class="headline headline-2 aside-title">You haven't posted yet.</h3>
+                {% else %}
+                <ul "grid-list">
+                    {% for block in my_post%}
+                      <li class="adjust">
+                        <div class="recent-post-card">
+                          
+                          <figure class="card-banner img-holder" >
+                            <img src={{block.image.url}}  loading="lazy"
+                              alt="Helpful Tips for Working from Home as a Freelancer" class="img-cover" id="photo">
+                          </figure>
+                          
+        
+                          <div class="card-content">
+        
+                            <p class="card-badge">{{block.updated_at|date:"F j, Y" }}</p>
+        
+                            <h3 class="headline headline-3 card-title">
+                              <a href="{% url 'get' sign=sign id=block.id %}" class="link hover-2">{{block.heading}}</a>
+                            </h3>
+        
+                            <p class="card-text">
+                              {{block.description}}
+                            </p>
+        
+                            <div class="card-wrapper">
+                              <div class="card-tag">
+                                <a href="#" class="span hover-2"># {{block.category}}</a>
+        
+                                <a href="#" class="span hover-2"># {{block.tag}}</a>
+                              </div>
+                            </div>
+        
+                          </div>
+        
+                        </div>
+                      </li>
+                    {% endfor %}
+                    </ul>
+                    {%endif%}
+            </div>
+    </div>
+   
+</div>
+{% endblock content %}
+{% block footer %}
+{% endblock %}

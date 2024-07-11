@@ -1,0 +1,290 @@
+{% extends 'base.html' %}
+{% comment %} <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Page Title</title>
+    <!-- Add any additional meta tags, links, or stylesheets here -->
+</head>
+<body>
+    <div>
+        <div>
+            <h1>{{listing.heading}}</h1>
+            <img src={{listing.image.url}} width="200" height="200" loading="lazy" alt="Joseph"
+                          class="profile-banner">
+        </div>
+        <div>
+            <img src={{listing.author.photo.url}} width="40" height="40" loading="lazy" alt="Joseph"
+                          class="profile-banner">
+            <h2>{{listing.author.user.username}}</h2>
+            <p>{{listing.updated_at}}</p>
+        </div>
+    </div>
+    <div>
+        <h4>{{listing.article}}</h4>
+        <h5>{{listing.category}}</h5>
+        <h5>{{listing.tag}}</h5>
+    </div>
+    <footer>
+        <p>&copy; 2023 Your Website. All rights reserved.</p>
+        <h1>COMMENT SECTION</h1>
+        {% if comm|length == 0 %}
+        <h3 style="color:green;">No comments added yet</h3>
+        {% else %}
+        {% for block in comm %}
+        <h3 style="color:red;">{{block.commenter_name.user.username}}</h3>
+        <h4 style="color:red;">{{block.comment}}</h4>
+        <h5 style="color:red;">{{block.comment_date}}</h5>
+        {% endfor %}
+        {% endif %}
+        {% if sign == '1' %}
+            <h5>userhome <a href="{% url 'user_home' %}" class="btn btn-primary">home</a></h5>
+        {% else %}
+            <h5>home <a href="{% url 'index' %}" class="btn btn-primary">home</a></h5>
+        {% endif %}
+        {% if listing.author.user == request.user %}
+        <h3>home <a href="{% url 'edit' sign=sign id=listing.id %}" class="btn btn-primary">Edit</a></h3>
+        {% endif %}
+        <h1>home <a href="{% url 'summarize'  id=listing.id %}" class="btn btn-primary">summarize</a></h1>
+    </footer>
+        
+    
+    
+    
+</body>
+</html> {% endcomment %}
+
+{% load static %}
+{% block  title%}
+  Luna
+{% endblock  %}
+{% block style %}
+.tagg{
+    padding-top:130px;
+    width:95%;
+    margin:auto;
+}
+.block{
+  padding-tap:130px;
+}
+.flex-container {
+  display: flex;
+  flex-direction: row;
+}
+#heading{
+  font-size:31px ;padding-top:30px; margin-left:20px; padding-left:0px;margin-left:0px; padding-right:0px
+}
+#text{
+  font-size:20px; text-align:left; line-height:32px;
+}
+@media (max-width: 800px) {
+  .flex-container {
+    flex-direction: column;
+  }
+  #heading {
+    font-size:22px ;padding-top:30px; margin-left:20px; padding-left:0px;margin-left:0px; padding-right:0px
+  }
+  #text{
+    font-size:17px; text-align:left; line-height:22px;
+  }
+}
+{% endblock  %}
+{% block head %}
+ <!-- Remember to include jQuery :) -->
+<!-- Remember to include jQuery :) -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
+
+<!-- jQuery Modal -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
+{% endblock  %}
+{% block content %}
+<div  class = "tagg" >
+  <div class="card feature-card">
+      <figure class="card-banner img-holder">
+        <img src={{listing.image.url}} loading="lazy"
+          alt="Self-observation is the first step of inner unfolding" class="img-cover"  style="max-width: 100%; height: 330px" 
+          >
+      </figure>
+      <div class="card-content">
+        <div class="card-wrapper" style="margin-top:5px">
+        <div class="flex-container" style="width:100%">
+        <h3 class="headline headline-3" id="heading">
+          <a href="{% url 'get' sign=sign id=listing.id %}" class="card-title hover-2">
+            {{listing.heading}}
+          </a>
+        </h3>
+        
+        <!-- Link to open the modal -->
+         <div style="padding-top:30px; margin:auto">
+        <a href="{% url 'summarize'  id=listing.id  sign=sign%}" rel="modal:open" class="btn btn-primary" style="height:41px;">Summarize</a> 
+         </div>
+        </div>
+      </div>
+      
+         <script>
+          $.modal.defaults = {
+            closeExisting: true,    // Close existing modals. Set this to false if you need to stack multiple modal instances.
+            escapeClose: true,      // Allows the user to close the modal by pressing `ESC`
+            clickClose: true,       // Allows the user to close the modal by clicking the overlay
+            closeText: 'Close',     // Text content for the close <a> tag.
+            closeClass: '',         // Add additional class(es) to the close <a> tag.
+            showClose: true,        // Shows a (X) icon/link in the top-right corner
+            modalClass: "modal",    // CSS class added to the element being displayed in the modal.
+            blockerClass: "block",  // CSS class added to the overlay (blocker).
+          
+            // HTML appended to the default spinner during AJAX requests.
+            spinnerHtml: '<div class="rect1"></div><div class="rect2"></div><div class="rect3"></div><div class="rect4"></div>',
+          
+            showSpinner: true,      // Enable/disable the default spinner during AJAX requests.
+            fadeDuration: null,     // Number of milliseconds the fade transition takes (null means no transition)
+            fadeDelay: 0.5          // Point during the overlay's fade-in that the modal begins to fade in (.5 = 50%, 1.5 = 150%, etc.)
+          };
+          
+        </script>
+       
+        
+        
+      </div>
+        <div class="card-wrapper" style="width=90% margin-top:5px">
+  
+            <div class="profile-card" style="height:70px">
+              <img src={{listing.author.photo.url}} width="60" height="60" loading="lazy" alt="Joseph"
+                class="profile-banner">
+
+              <div>
+                <p class="card-title" style="font-size:20px; font-weight:bold">{{listing.author.user.username}}</p>
+
+                <p class="card-subtitle">{{listing.updated_at}}</p>
+              </div>
+            </div>
+            
+            {% comment %} <button id="like_{{post.id}}" type="button" value="like" class="card-btn">:)</button> {% endcomment %}
+        {% if sign == '1' %}
+            <button  id="like_{{listing.id}}" type="button" value=like>
+            {% if listing.id in liked_listings_ids %}
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="red" color="red" class="bi bi-heart"
+                viewBox="0 0 16 16">
+                <path
+                    d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z">
+                </path>
+            </svg>
+            {% else %}
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="white" class="bi bi-heart"
+                viewBox="0 0 16 16">
+                <path
+                    d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z">
+                </path>
+            </svg>
+            </button>
+          {% endif %}
+          <script>
+            $("#like_{{listing.id}}").click( function() {
+              $.ajax({
+                 type:"POST",
+                 url:"{% url 'like'  id=listing.id %}",
+                 data: {'csrfmiddlewaretoken': '{{csrf_token}}'},
+                 datatype:'json',
+                 success: function(r) {
+                   $("#like_{{listing.id}}").find("svg").attr("fill", r.is_liked_by_user ? "red" : "white");
+                 },
+                 error: function(rs, e){ 
+                  alert(e);
+                 }
+              });
+            })
+          </script>  
+          {% endif %}
+          
+          </div>
+    <div class="card-wrapper" style="margin-top:15px; margin-bottom:30px; width:95%; margin:auto">
+        <p class="card-text" id="text">
+                {{listing.article}}
+            </p>
+
+          
+      </div>
+      <div class="card-wrapper">
+        <div class="card-tag" style="margin-left:50px; margin-bottom:30px">
+          <a href="#" class="span hover-2" style="padding-right:15px"># {{listing.category}}</a>
+
+          <a href="#" class="span hover-2"># {{listing.tag}}</a>
+        </div>
+      </div>
+      <div class="card-wrapper">
+        {% if listing.author.user == request.user %}
+        <a href="{% url 'edit' sign=sign id=listing.id %}" class="btn btn-primary" style="margin-left:auto">Edit</a>
+        <a href="{% url 'delete' sign=sign id=listing.id %}" class="btn btn-primary" style="color:#4f0808">Delete</a>
+        {% endif %}
+      </div>
+       
+</div>
+</div>
+<div style="padding-bottom: 100px; width: 90%; margin:auto; padding-top:30px">
+    <div class="card aside-card">
+
+        <h3 class="headline headline-2 aside-title" style="margin-bottom: 18px;">
+          <span class="span">Comments</span>
+        </h3>
+
+        <div class="hero" id="home" aria-label="home" style="padding-bottom: 20px; padding-top:5px;">
+        <form  action="" method="post" class="input-wrapper" style="max-width:900px;">
+          {% for form_field in comment_form %}
+            {% csrf_token %}
+            {{form_field}}
+          {% endfor %}
+          <button class="btn btn-primary" type= 'submit'>
+            <span class="span">Comment</span>
+      
+            <ion-icon name="arrow-forward-outline" aria-hidden="true"></ion-icon>
+          </button>
+       </form> 
+    </div>
+     
+        {% if comm|length == 0 %}
+        <h3 class="headline headline-2 aside-title">No comments added yet.</h3>
+        {% else %}
+        <ul class="popular-list">
+        {% for block in comm %}
+          <li>
+            <div class="popular-card">
+
+            <figure class="card-banner img-holder" style="--width: 64; --height: 64;">
+              <img src={{block.commenter_name.photo.url}} loading="lazy"
+                alt="Creating is a privilege but it’s also a gift" class="img-cover">
+            </figure>
+
+              <div class="card-content">
+
+                <h4 class="headline headline-4 card-title">
+                  {{block.comment}}
+                </h4>
+                <div class="card-wrapper">
+                    <div class="card-tag">
+                        <p class="card-title" style="font-size:15px; font-weight:bold">{{block.commenter_name.user.username}}</p>
+                    </div>
+
+                    <div class="wrapper">
+                      <ion-icon name="time-outline" aria-hidden="true"></ion-icon>
+
+                      <span class="span"><time class="publish-date" datetime="2022-04-15">{{block.comment_date}}</time></span>
+                    </div>
+                </div>
+
+              </div>
+
+            </div>
+          </li>
+        {% endfor %}
+       
+        </ul>
+        {%endif%}
+
+      </div>
+</div>
+<!-- Modal HTML embedded directly into document -->
+
+{% endblock content %}
+{% block footer %}
+{% endblock %}

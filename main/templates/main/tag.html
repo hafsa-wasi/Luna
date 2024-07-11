@@ -1,0 +1,155 @@
+{% extends 'base.html' %}
+{% comment %} {% extends 'base.html' %}
+{% load static %}
+{% block  title%}
+  TAGS
+{% endblock  %}
+{% block style %}
+.tagg{
+    padding-top: 135px;
+    padding-left: 70px;
+    padding-right: 70px;
+    padding-bottom: 60px;
+  }
+
+{% endblock  %}
+{% block content %}
+<div class = tagg>
+  <h2 class="headline headline-2 section-title" id="tag-label" id="tag">
+    <span class="span" >Popular Tags</span>
+  </h2>
+  <p class="section-text">
+    Most searched keywords
+  </p>
+    <ul class="feature-list" >
+        {% for block in topic %}
+        
+          <li>
+            <div class="card feature-card">
+              <figure class="card-banner img-holder" style="--width: 1602; --height: 903;">
+                <img src={{block.image.url}} width="1602" height="903" loading="lazy"
+                  alt="Self-observation is the first step of inner unfolding" class="img-cover">
+              </figure>
+
+              <div class="card-content">
+
+                <div class="card-wrapper">
+                  <div class="card-tag">
+                    <a href="#" class="span hover-2">#{{block.category}}</a>
+
+                    <a href="#" class="span hover-2"> #{{block.tag}}</a>
+                  </div>
+                  
+                </div>
+
+                <h3 class="headline headline-3">
+                  <a href="{% url 'get' sign=sign id=block.id %}" class="card-title hover-2">
+                    {{block.heading}}
+                  </a> 
+                </h3>
+
+                <div class="card-wrapper">
+
+                  <div class="profile-card">
+                    <img src={{block.author.photo.url}} width="48" height="48" loading="lazy" alt="Joseph"
+                      class="profile-banner">
+
+                    <div>
+                      <p class="card-title">{{block.author.user.username}}</p>
+
+                      <p class="card-subtitle">{{block.updated_at}}</p>
+                    </div>
+                  </div>
+
+                  <a href="#" class="card-btn">Read more</a>
+
+                </div>
+
+              </div>
+
+            </div>
+          </li>
+        
+      {% endfor %}
+        </ul>
+    </div>
+{% endblock content %}
+     {% endcomment %}
+
+{% load static %}
+{% block  title%}
+       Luna
+{% endblock  %}
+     {% block style %}
+     .tagg{
+         padding-top: 135px;
+       }
+     .adjust{
+       margin-bottom:50px;
+     }
+     
+     {% endblock  %}
+     {% block content %}
+     <div class = tagg >
+               <section  id="recent" aria-labelledby="recent-label">
+                 <div class="container">
+         
+                   <div class="post-main">
+         
+                     <h2 class="headline headline-2 section-title">
+                       <span class="span">{{tag|capfirst}} Articles</span>
+                     </h2>
+         
+                     <p class="section-text">
+                       Read articles on {{tag}} topic
+                     </p>
+         
+                     <ul "grid-list">
+                     {% for block in topic %}
+                       <li class="adjust">
+                         <div class="recent-post-card">
+                           
+                           <figure class="card-banner img-holder" style="--width: 1602; --height: 903;">
+                             <img src={{block.image.url}}  loading="lazy"
+                               alt="Helpful Tips for Working from Home as a Freelancer" class="img-cover">
+                           </figure>
+                           
+         
+                           <div class="card-content">
+         
+                             <p class="card-badge">{{block.updated_at|date:"F j, Y" }}</p>
+         
+                             <h3 class="headline headline-3 card-title">
+                               <a href="{% url 'get' sign=sign id=block.id %}" class="link hover-2">{{block.heading}}</a>
+                             </h3>
+         
+                             <p class="card-text">
+                               {{block.description}}
+                             </p>
+         
+                             <div class="card-wrapper">
+                               <div class="card-tag">
+                                 <a href="#" class="span hover-2"># {{block.category}}</a>
+         
+                                 <a href="#" class="span hover-2"># {{block.tag}}</a>
+                               </div>
+         
+                               <div class="wrapper">
+                                 <ion-icon name="time-outline" aria-hidden="true"></ion-icon>
+         
+                                 <span class="span">3 mins read</span>
+                               </div>
+                             </div>
+         
+                           </div>
+         
+                         </div>
+                       </li>
+                     {% endfor %}
+                     </ul>
+                    </div>
+     </div>
+     {% endblock content %}
+     
+            
+     
